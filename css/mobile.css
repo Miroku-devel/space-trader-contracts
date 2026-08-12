@@ -1,0 +1,435 @@
+@media (max-width: 600px) {
+    #search-panel {
+        min-width: 0;
+        max-width: none;
+        width: 100vw;
+    }
+    #bank-panel, #ship-panel, #dashboard-panel, #mail-panel, #mission-panel, #trade-panel, #options-panel {
+        min-width: 0;
+        max-width: none;
+        width: 100vw;
+        max-height: 90vh;
+        padding: 10px 12px;
+        flex-direction: column;
+    }
+    #ship-sidebar, #bank-sidebar, #dashboard-sidebar, #trade-sidebar, #mail-sidebar, #mission-sidebar {
+        order: 1;
+        flex-direction: row;
+        padding: 8px 0 0 0;
+        margin-left: 0;
+        border-right: none;
+        border-top: 1px solid rgba(0, 200, 255, 0.3);
+        border-bottom: none;
+        justify-content: center;
+        background: none;
+    }
+    #trade-sidebar, #dashboard-sidebar, #ship-sidebar, #bank-sidebar, #mail-sidebar, #mission-sidebar {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    html.no-blur #ship-sidebar, html.no-blur #bank-sidebar, html.no-blur #dashboard-sidebar,
+    html.no-blur #mail-sidebar, html.no-blur #mission-sidebar, html.no-blur #trade-sidebar {
+        background: none;
+    }
+    #trade-panel, #search-panel, #dashboard-panel, #ship-panel, #bank-panel, #mail-panel, #mission-panel, #options-panel, #board-npc-panel, #bribe-panel {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+    #bank-loan-input {
+        flex: 1 1 100%;
+    }
+    .bank-loan-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #trade-columns {
+        grid-template-columns: 1fr;
+    }
+    .trade-row {
+        font-size: 11px;
+        padding: 3px 4px;
+        min-height: 24px;
+    }
+    .trade-row.local {
+        display: grid;
+        grid-template-columns: 1fr 210px 32px 32px;
+        align-items: center;
+        gap: 0 2px;
+        padding: 3px 4px;
+    }
+    .trade-col-header {
+        display: grid;
+        grid-template-columns: 1fr 210px 32px 32px;
+        align-items: center;
+        gap: 0 2px;
+        padding: 3px 4px;
+    }
+    .trade-row.local .trade-stock {
+        width: 100%;
+    }
+    .trade-row.local .trade-cargo {
+        width: 100%;
+    }
+    .trade-actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+    }
+    .trade-action {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+    }
+    .buy-action {
+        justify-content: flex-end;
+    }
+    .sell-action {
+        justify-content: flex-end;
+    }
+    .trade-price {
+        font-size: 10px;
+    }
+    .trade-cargo {
+        font-size: 10px;
+    }
+    .trade-btn {
+        padding: 2px 6px;
+        font-size: 10px;
+    }
+    #board-npc-panel, #bribe-panel {
+        min-width: 0; max-width: none;
+        width: 100vw; max-height: 90vh;
+        padding: 10px 12px; flex-direction: column;
+    }
+    #board-npc-header {
+        flex-wrap: wrap; gap: 4px;
+    }
+    #bank-header, #ship-header, #dashboard-header, #trade-header, #mail-header, #mission-header {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    #info-panel-wrap {
+        display: none;
+    }
+    #hud-info-text {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 0 12px 6px;
+        margin: 0 -12px 2px;
+        gap: 8px;
+        font-size: 11px;
+        color: rgba(255,255,255,0.6);
+        border-bottom: 1px solid rgba(0, 200, 255, 0.25);
+    }
+    #hud-info-sidebar {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-shrink: 0;
+        padding: 10px 30px 12px 12px;
+        margin: -8px 0 -6px -12px;
+        align-self: stretch;
+        border-right: 1px solid rgba(0, 200, 255, 0.3);
+        background-size: auto 130%;
+        background-repeat: no-repeat;
+        background-position: center -15px;
+        background-image: linear-gradient(rgba(8, 13, 26, 0.8), rgba(46, 74, 132, 0.4)), var(--sidebar-bg, none);
+        font-size: 11px;
+    }
+    #hud-info-text #hud-date {
+        color: rgba(255,255,255,0.45);
+    }
+    #hud-info-text #hud-star-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+        min-width: 0;
+        line-height: 1.4;
+    }
+    #hud-info-text #hud-star-text .btn-fav svg {
+        width: 11px !important;
+        height: 12px !important;
+        color: inherit;
+    }
+    #hud-wrap {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+    }
+    #hud-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px 12px 10px;
+        border-top: 1px solid rgba(0, 200, 255, 0.25);
+        pointer-events: auto;
+        touch-action: auto;
+    }
+    #hud-actions, #hud-star-btns {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        justify-content: center;
+    }
+    #hud-footer button {
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(0, 200, 255, 0.12);
+        border-color: rgba(0, 200, 255, 0.25);
+        color: #00c8ff;
+        transition: background 0.15s;
+        touch-action: auto;
+    }
+    #hud-footer .btn-fav {
+        color: inherit;
+        width: auto !important;
+        height: auto !important;
+        background: none !important;
+        border: none !important;
+        border-radius: 0;
+    }
+    #hud-footer button:disabled {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+    #hud-footer button svg {
+        width: 18px;
+        height: 18px;
+    }
+    #hud-footer .btn-fav svg {
+        width: 11px !important;
+        height: 11px !important;
+        color: inherit;
+    }
+    #hud-btn-home {
+        background: rgba(0, 255, 136, 0.12) !important;
+        border-color: rgba(0, 255, 136, 0.25) !important;
+        color: #00ff88 !important;
+    }
+    #hud-btn-trade, #hud-btn-search, #hud-btn-dashboard, #hud-btn-ship, #hud-btn-bank, #hud-btn-mail, #hud-btn-mission, #hud-btn-wormhole {
+        background: rgba(0, 200, 255, 0.12) !important;
+        border-color: rgba(0, 200, 255, 0.25) !important;
+        color: #00c8ff !important;
+    }
+    #hud-btn-travel {
+        background: rgba(0, 255, 136, 0.12) !important;
+        border-color: rgba(0, 255, 136, 0.25) !important;
+        color: #00ff88 !important;
+    }
+    #hud-btn-route.route-clean {
+        background: rgba(255, 60, 60, 0.12) !important;
+        border: 1px solid rgba(255, 60, 60, 0.25) !important;
+        color: #ff6666 !important;
+    }
+    #hud-btn-mail.has-unread svg {
+        animation: mail-blink 1.2s ease-in-out infinite;
+    }
+    #btn-bank-insurance {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .fuel-loan-form + div, .hull-loan-form + div {
+        justify-content: center !important;
+    }
+    #hull-stats .fuel-loan-controls, #hull-stats .hull-loan-controls {
+        justify-content: center;
+    }
+    #fuel-slider,#hull-slider {
+        flex: 1 1 100%;
+    }
+    .fuel-loan-controls, .hull-loan-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #ship-preview {
+        flex-direction: column;
+        align-items: center;
+    }
+    #ship-preview-stats {
+        font-size: 11px;
+    }
+    .split-stats > :nth-child(even) {
+        display: none;
+    }
+    .split-stats > :nth-child(odd)::after {
+        content: ': ' attr(data-value);
+    }
+    #ship-preview-stats.split-stats > :nth-child(4n+3) {
+        text-align: left;
+        padding-left: 10px;
+        padding-right: 0;
+    }
+    #equip-columns {
+        grid-template-columns: 1fr;
+    }
+    .equip-row {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+    .equip-price {
+        min-width: 55px;
+        font-size: 11px;
+    }
+    .equip-btn {
+        padding: 2px 8px;
+        font-size: 10px;
+    }
+    .dashboard-info-row-group {
+        flex-direction: column;
+    }
+    #pilot-list, .mission-list {
+        grid-template-columns: 1fr;
+    }
+    .mail-entry-subject {
+        font-size: 11px;
+    }
+    .mail-entry-time {
+        font-size: 9px;
+    }
+    #trader-npc-panel {
+        min-width: 0; max-width: none;
+        width: 100vw; max-height: 90vh;
+        padding: 10px 12px; flex-direction: column;
+        border-radius: 0;
+        border-left: none; border-right: none;
+    }
+    #trader-npc-header {
+        flex-wrap: wrap; gap: 4px;
+    }
+    #travel-ship, #wormhole-ship {
+        left: 50%;
+        top: auto;
+        bottom: 140px;
+        transform: translateX(-50%) rotate(-90deg);
+        width: 120px;
+        height: 120px;
+    }
+    #wormhole-ship {
+        bottom: 140px;
+    }
+    #wormhole-crate {
+        left: 50%;
+        right: auto;
+        top: 150px;
+        bottom: auto;
+        transform: translateX(-50%) translateY(-200px);
+        width: 65px;
+        height: 65px;
+    }
+    #wormhole-crate.show {
+        transform: translateX(-50%) translateY(0);
+    }
+    #travel-enemy {
+        left: 50%;
+        right: auto;
+        top: 120px;
+        bottom: auto;
+        transform: translateX(-50%) translateY(-200px) rotate(90deg);
+    }
+    #travel-enemy.show {
+        transform: translateX(-50%) translateY(0) rotate(90deg);
+    }
+    #travel-hull-player { transform-origin: top left; }
+    #travel-hull-enemy { transform-origin: top right; }
+    #travel-shield-player { transform-origin: top left; }
+    #travel-shield-enemy { transform-origin: top right; }
+    #travel-encounter-buttons {
+        bottom: 60px;
+    }
+    #wormhole-answer-btns {
+        bottom: 60px;
+    }
+    #travel-progress, #wormhole-progress {
+        top: auto;
+        bottom: 18px;
+    }
+    #travel-msg-label {
+        white-space: break-spaces;
+        min-width: 250px;
+        top: 75px;
+    }
+    #travel-msg-bounty {
+        min-width: 300px;
+        top: 100px;
+    }
+    #travel-stats-label {
+        bottom: 95px;
+    }
+    #wormhole-msg-label {
+        min-width: 300px;
+        top: 75px;
+    }
+    #wormhole-puzzle-sequence {
+        min-width: 300px;
+        top: 100px;
+    }
+    #wormhole-answer-btns {
+        bottom: 60px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #travel-name-player {
+        top: 18px;
+        bottom: auto;
+        left: 10px;
+    }
+    #travel-name-enemy {
+        top: 18px;
+        bottom: auto;
+        right: 10px;
+    }
+    #travel-hull-player {
+        top: 34px;
+        bottom: auto;
+        left: 10px;
+    }
+    #travel-hull-enemy {
+        top: 34px;
+        bottom: auto;
+        right: 10px;
+    }
+    #travel-shield-player {
+        top: 46px;
+        bottom: auto;
+        left: 10px;
+    }
+    #travel-shield-enemy {
+        top: 46px;
+        bottom: auto;
+        right: 10px;
+    }
+    .blur-bg,
+    .overlay-bg,
+    #info-panel, #trade-qty-panel, #trade-qty-overlay,
+    #trader-npc-qty-overlay, #trader-npc-qty-panel,
+    #confirm-panel, #search-bookmarks,
+    #ship-buy-overlay, #ship-buy-panel,
+    #bank-repay-overlay, #bank-repay-panel,
+    #ship-sidebar, #bank-sidebar, #dashboard-sidebar, #mail-sidebar, #mission-sidebar,
+    #trade-sidebar, #hud-footer {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+    #search-panel, #search-bookmarks,
+    #bank-panel, #ship-panel, #dashboard-panel, #mail-panel, #mission-panel, #trade-panel, #options-panel,
+    #hud-footer {
+        background: linear-gradient(rgba(8, 11, 17, 0.95), rgba(33, 48, 76, 0.75));
+    }
+}

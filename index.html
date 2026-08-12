@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Trader - Contracts</title>
+    <link rel="stylesheet" href="css/desktop.css">
+    <link rel="stylesheet" href="css/mobile.css">
+
+</head>
+<body>
+    <div id="loading">
+        <div id="loading-ring">
+            <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(74,128,144,0.15)" stroke-width="4"/>
+                <circle id="progress-ring" cx="50" cy="50" r="44" fill="none" stroke="#4a8090" stroke-width="4" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46" transform="rotate(-90 50 50)"/>
+            </svg>
+        </div>
+        <button id="start-btn" aria-label="Start game"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div id="ui-overlay">
+        <div id="info-panel-wrap">
+            <div id="news-label"><span id="news-label-text">Breaking News</span></div>
+            <div id="info-panel">
+            <div id="info-sidebar">
+                <span id="info-date"></span>
+                <span id="info-credits" class="credits-display"></span>
+                <span class="pilot-label"></span>
+                <span class="pilot-record"></span>
+                <span class="pilot-rep"></span>
+            </div>
+            <div id="info-body">
+            <p id="star-info"></p>
+            <div id="info-buttons">
+                <div id="info-actions">
+                    <button id="btn-home"></button>
+                    <button id="btn-trade"></button>
+                    <button id="btn-search"></button>
+                    <button id="btn-dashboard"></button>
+                    <button id="btn-ship" disabled></button>
+                    <button id="btn-bank" disabled></button>
+                </div>
+                <div id="info-extras">
+                    <button id="btn-travel"></button>
+                    <button id="btn-wormhole"></button>
+                    <button id="btn-route"></button>
+                    <button id="btn-mail" disabled></button>
+                    <button id="btn-mission" disabled></button>
+                    <button id="btn-options" class="btn-cyan"></button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div id="search-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="search-panel">
+                <div id="search-row">
+                    <input type="text" id="search-input" placeholder="Search star..." autocomplete="off" spellcheck="false">
+                </div>
+                <div id="search-results"></div>
+            </div>
+            <div id="search-bookmarks"></div>
+        </div>
+        <div id="trade-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="trade-panel">
+                <div id="trade-sidebar"></div>
+                <div id="trade-content"></div>
+            </div>
+        </div>
+        <div id="trade-qty-overlay" class="hidden">
+            <div id="trade-qty-panel">
+                <div id="trade-qty-header"></div>
+                <div id="trade-qty-body"></div>
+            </div>
+        </div>
+        <div id="trader-npc-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="trader-npc-panel">
+                <div id="trader-npc-content"></div>
+            </div>
+        </div>
+        <div id="trader-npc-qty-overlay" class="hidden">
+            <div id="trader-npc-qty-panel">
+                <div id="trader-npc-qty-header"></div>
+                <div id="trader-npc-qty-body"></div>
+            </div>
+        </div>
+        <div id="board-npc-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="board-npc-panel">
+                <div id="board-npc-content"></div>
+            </div>
+        </div>
+        <div id="surrender-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="bribe-panel">
+                <div id="bribe-content"></div>
+            </div>
+        </div>
+        <div id="ship-buy-overlay" class="hidden">
+            <div id="ship-buy-panel">
+                <div id="ship-buy-header">Confirm Purchase</div>
+                <div id="ship-buy-msg"></div>
+                <div id="ship-buy-buttons">
+                    <button id="btn-ship-buy-cancel" class="qty-btn cancel">Cancel</button>
+                    <button id="btn-ship-buy-confirm" class="qty-btn confirm">Buy</button>
+                </div>
+            </div>
+        </div>
+        <div id="confirm-overlay" class="hidden">
+            <div id="confirm-panel">
+                <div id="confirm-msg"></div>
+                <div id="confirm-buttons">
+                    <button id="btn-confirm-cancel">No</button>
+                    <button id="btn-confirm-ok" class="btn-red">Yes</button>
+                </div>
+            </div>
+        </div>
+        <div id="dashboard-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="dashboard-panel">
+                <div id="dashboard-sidebar"></div>
+                <div id="dashboard-content"></div>
+            </div>
+        </div>
+        <div id="ship-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="ship-panel">
+                <div id="ship-sidebar"></div>
+                <div id="ship-content"></div>
+            </div>
+        </div>
+        <div id="bank-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="bank-panel">
+                <div id="bank-sidebar"></div>
+                <div id="bank-content"></div>
+            </div>
+        </div>
+        <div id="bank-repay-overlay" class="hidden">
+            <div id="bank-repay-panel">
+                <div id="bank-repay-header">Repay Loan</div>
+                <div id="bank-repay-body"></div>
+            </div>
+        </div>
+        <div id="mail-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="mail-panel">
+                <div id="mail-sidebar"></div>
+                <div id="mail-content"></div>
+            </div>
+        </div>
+        <div id="mission-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="mission-panel">
+                <div id="mission-sidebar"></div>
+                <div id="mission-content"></div>
+            </div>
+        </div>
+        <div id="options-overlay" class="hidden">
+            <div class="overlay-bg"></div>
+            <div id="options-panel">
+                <div id="options-content"></div>
+            </div>
+        </div>
+        <div id="gameover-overlay" class="hidden">
+            <div id="gameover-panel">
+                <div id="gameover-content"></div>
+            </div>
+        </div>
+        <div id="commander-overlay" class="hidden">
+            <div id="commander-content"></div>
+        </div>
+        <div id="travel-overlay" class="hidden">
+            <div id="travel-scene">
+                <canvas class="combat-sky"></canvas>
+                <div id="travel-ship"></div>
+                <div id="travel-progress">
+                    <div id="travel-progress-row">
+                        <span id="travel-progress-from"></span>
+                        <div id="travel-progress-label-wrap"><span id="travel-progress-label"></span></div>
+                        <span id="travel-progress-to"></span>
+                    </div>
+                    <div id="travel-progress-track"><div id="travel-progress-bar"></div></div>
+                </div>
+                <div id="travel-msg-label" class="hidden"></div>
+                <div id="travel-msg-bounty" class="hidden"></div>
+                <div id="travel-stats-label" class="hidden"></div>
+                <div id="travel-enemy" class="hidden"></div>
+                <span id="travel-name-player" class="travel-name hidden"></span>
+                <div id="travel-hull-player" class="travel-hull"><div class="travel-hull-bar"><div class="travel-hull-fill"></div></div><span class="travel-hull-text">100%</span></div>
+                <div id="travel-shield-player" class="travel-shield"><div class="travel-shield-bar"><div class="travel-shield-fill"></div></div><span class="travel-shield-text">100%</span></div>
+                <span id="travel-name-enemy" class="travel-name hidden"></span>
+                <div id="travel-hull-enemy" class="travel-hull"><div class="travel-hull-bar"><div class="travel-hull-fill"></div></div><span class="travel-hull-text">100%</span></div>
+                <div id="travel-shield-enemy" class="travel-shield"><div class="travel-shield-bar"><div class="travel-shield-fill"></div></div><span class="travel-shield-text">100%</span></div>
+                <span id="travel-encounter-buttons" class="hidden">
+                    <span id="travel-bottom-buttons" class="hidden">
+                        <button class="enc-btn enc-btn-auto hidden" data-action="auto">Auto</button>
+                        <button class="enc-btn enc-btn-interrupt hidden" data-action="interrupt">Interrupt</button>
+                        <button class="enc-btn" data-action="attack">Attack</button>
+                        <button class="enc-btn" data-action="flee">Flee</button>
+                        <button class="enc-btn" data-action="surrender">Surrender</button>
+                        <button class="enc-btn" data-action="submit">Submit</button>
+                        <button class="enc-btn" data-action="ignore">Continue</button>
+                        <button class="enc-btn" data-action="bribe">Bribe</button>
+                        <button class="enc-btn" data-action="arrest">Arrest</button>
+                        <button class="enc-btn" data-action="decloak">Decloak</button>
+                        <button class="enc-btn" data-action="trade">Trade</button>
+                        <button class="enc-btn" data-action="plunder">Plunder</button>
+                        <button class="enc-btn" data-action="catch">Catch</button>
+                        <button class="enc-btn" data-action="board">Board</button>
+                        <button class="enc-btn" data-action="inspect">Inspection</button>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div id="wormhole-overlay" class="hidden">
+            <div id="wormhole-scene">
+                <canvas class="wormhole-sky"></canvas>
+                <div id="wormhole-ship"></div>
+                <div id="wormhole-progress">
+                    <div id="wormhole-progress-row">
+                        <span id="wormhole-progress-from"></span>
+                        <div id="wormhole-progress-label-wrap"><span id="wormhole-progress-label"></span></div>
+                        <span id="wormhole-progress-to"></span>
+                    </div>
+                    <div id="wormhole-progress-track"><div id="wormhole-progress-bar"></div></div>
+                </div>
+                <div id="wormhole-msg-label" class="hidden"></div>
+                <div id="wormhole-puzzle-sequence" class="hidden"></div>
+                <div id="wormhole-crate" class="hidden"></div>
+                <span id="wormhole-answer-btns">
+                    <button id="puzzle-btn-1" class="puzzle-btn hidden"></button>
+                    <button id="puzzle-btn-2" class="puzzle-btn hidden"></button>
+                    <button id="puzzle-btn-3" class="puzzle-btn hidden"></button>
+                    <button id="wormhole-ignore-btn" class="hidden">Continue</button>
+                </span>
+            </div>
+        </div>
+        <div id="hud-wrap">
+            <div id="hud-news-label"><span id="hud-news-label-text">Breaking News</span></div>
+            <div id="hud-footer">
+            <div id="hud-info-text">
+                <div id="hud-info-sidebar">
+                    <span id="hud-date"></span>
+                    <span id="hud-credits" class="credits-display"></span>
+                <span class="pilot-label"></span>
+                <span class="pilot-record"></span>
+                <span class="pilot-rep"></span>
+                </div>
+                <span id="hud-star-text"></span>
+            </div>
+            <div id="hud-actions">
+                <button id="hud-btn-home"></button>
+                <button id="hud-btn-trade"></button>
+                <button id="hud-btn-search"></button>
+                <button id="hud-btn-dashboard"></button>
+                <button id="hud-btn-ship" disabled></button>
+                <button id="hud-btn-bank" disabled></button>
+            </div>
+            <div id="hud-star-btns">
+                <button id="hud-btn-travel"></button>
+                <button id="hud-btn-wormhole"></button>
+                <button id="hud-btn-route"></button>
+                <button id="hud-btn-mail"></button>
+                <button id="hud-btn-mission"></button>
+                <button id="hud-btn-options"></button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div id="rotate-overlay" class="hidden">
+        <div id="rotate-content">
+            <svg id="rotate-icon" viewBox="0 0 64 64" fill="none" stroke="#00c8ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="16" y="8" width="32" height="48" rx="4" transform="rotate(0 32 32)"/>
+                <circle cx="32" cy="48" r="3" fill="#00c8ff" stroke="none"/>
+                <path d="M8 24 L16 20 L16 28 Z" fill="#00c8ff" stroke="none"/>
+            </svg>
+            <p id="rotate-text">Please rotate your phone to portrait</p>
+        </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <canvas id="labels"></canvas>
+    <script src="js/svg/data-icons.js"></script>
+    <script src="js/sfx.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/shaders.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/svg/data-avatars.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/svg/data-ships.js"></script>
+    <script src="js/svg/data-special.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/mission.js"></script>
+    <script src="js/gameover.js"></script>
+    <script src="js/bank.js"></script>
+    <script src="js/mail.js"></script>
+    <script src="js/commander.js"></script>
+    <script src="js/news.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/trade.js"></script>
+    <script src="js/prison.js"></script>
+    <script src="js/encounter.js"></script>
+    <script src="js/travel.js"></script>
+    <script src="js/wormhole.js"></script>
+    <script src="js/npc.js"></script>
+    <script src="js/combat.js"></script>
+    <script src="js/console.js"></script>
+</body>
+</html>
