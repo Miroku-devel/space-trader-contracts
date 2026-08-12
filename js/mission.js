@@ -404,6 +404,7 @@ function saveMissionState() {
         cargoItem: m.cargoItem,
         cargoUnits: m.cargoUnits,
         requiredRecord: m.requiredRecord,
+        hasItem: m.hasItem || false,
         active: m.active || false,
         completed: m.completed || false,
         cancelled: m.cancelled || false,
@@ -419,6 +420,7 @@ function loadMissionState() {
     if (data.procMissions) {
       procMissions = data.procMissions;
       procMissions.forEach(function (m) {
+        if (m.hasItem == null) m.hasItem = !!m.active;
         if (m.type === "patrol") {
           m.type = "manhunt";
           if (m.patrolStarName && !m.manhuntStarName) {
