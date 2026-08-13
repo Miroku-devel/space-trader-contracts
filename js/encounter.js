@@ -50,6 +50,11 @@ function showActions(list) {
     .forEach(function (a) {
       if (encBtns[a]) encBtns[a].classList.remove("hidden");
     });
+  list.forEach(function (a) {
+    if (encBtns[a] && encBtns[a].parentNode) {
+      encBtns[a].parentNode.appendChild(encBtns[a]);
+    }
+  });
 }
 var _travelMsgTimeout = null;
 function showTravelMsg(msg, immediate) {
@@ -761,7 +766,7 @@ function submitAction() {
     if (recBefore !== null && policeRecordScore !== recBefore)
       _flashStatDelta("pilot-record", policeRecordScore - recBefore);
     if (typeof saveState === "function") saveState();
-    showTravelMsg("The police find nothing illegal and apologize");
+    showTravelMsg("Clean, you are free to go");
     if (typeof updateInfoTravel === "function") updateInfoTravel();
     window._enemyOutcomeDecided = true;
     if (typeof window._updateAttackBtn === "function")
@@ -921,7 +926,7 @@ function inspectAction() {
           bountyEl.classList.remove("hidden");
         }
       }, 300);
-      showActions(["ignore", "arrest", "bribe"]);
+      showActions(["arrest", "ignore", "bribe"]);
       if (encBtns.ignore) encBtns.ignore.disabled = false;
       if (encBtns.arrest) encBtns.arrest.disabled = false;
       if (encBtns.bribe) encBtns.bribe.disabled = false;
@@ -1172,7 +1177,7 @@ function _enemySurrender() {
       if (encBtns.ignore) encBtns.ignore.disabled = false;
       if (encBtns.arrest) encBtns.arrest.disabled = false;
     } else {
-      showActions(["ignore", "plunder", "catch"]);
+      showActions(["plunder", "ignore", "catch"]);
       if (encBtns.ignore) encBtns.ignore.disabled = false;
       if (encBtns.plunder) encBtns.plunder.disabled = false;
       if (encBtns.catch) encBtns.catch.disabled = false;
