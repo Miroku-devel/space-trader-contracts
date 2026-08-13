@@ -222,9 +222,10 @@ function _totalShieldPower(list) {
 }
 window._totalShieldPower = _totalShieldPower;
 var _weaponPool = [
-  { v: "Pulse laser", w: 50 },
-  { v: "Beam laser", w: 35 },
+  { v: "Pulse laser", w: 48 },
+  { v: "Beam laser", w: 33 },
   { v: "Military laser", w: 15 },
+  { v: "Morgan's laser", w: 4 },
 ];
 var _shieldPool = [
   { v: "Energy shield", w: 70 },
@@ -235,8 +236,7 @@ var _gadgetPool = [
   { v: "5 extra cargo bays", w: 35 },
   { v: "Auto-repair system", w: 20 },
   { v: "Navigation system", w: 20 },
-  { v: "Targeting system", w: 20 },
-  { v: "Cloaking device", w: 5 },
+  { v: "Targeting system", w: 25 },
 ];
 function _bestRoll(tries, max) {
   var best = 0;
@@ -1773,21 +1773,6 @@ function spawnEncounter(type) {
       (window._policeEncounterSubtype === "inspection" && window._inspected))
   ) {
     window._policeEncounterSubtype = undefined;
-    window._encounterSystem = null;
-    window._enemyWeapons = [];
-    window._enemyShields = [];
-    window._enemyGadgets = [];
-    window._enemyCargo = {};
-    window._isEnemyFleeing = false;
-    window._enemyOutcomeDecided = false;
-    window._warpPaused = false;
-    return;
-  }
-  if (
-    window._enemyGadgets.indexOf("Cloaking device") !== -1 &&
-    typeof window._enemyEngineer === "number" &&
-    window._enemyEngineer > engineerSkillTotal()
-  ) {
     window._encounterSystem = null;
     window._enemyWeapons = [];
     window._enemyShields = [];
