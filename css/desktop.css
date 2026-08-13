@@ -4059,6 +4059,16 @@ label[for="bank-loan-input"] span:last-child {
 .enc-btn.hidden {
     display: none !important;
 }
+.enc-btn[data-action="ignore"] {
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.15);
+}
+@media (hover: hover) {
+.enc-btn[data-action="ignore"]:hover {
+    background: rgba(0, 255, 136, 0.3);
+}
+}
 .enc-btn:disabled {
     opacity: 0.35;
     cursor: default;
