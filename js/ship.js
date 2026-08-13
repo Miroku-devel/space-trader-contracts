@@ -390,7 +390,11 @@ function cargoSellValue() {
   if (typeof playerCargo === "undefined" || !currentStar) return 0;
   let total = 0;
   for (const item of TRADE_ITEMS) {
-    const qty = playerCargo[item.id] || 0;
+    const qty = Math.max(
+      0,
+      (playerCargo[item.id] || 0) -
+        (typeof lockedCargo !== "undefined" ? lockedCargo[item.id] || 0 : 0),
+    );
     if (qty > 0) total += qty * getItemSellPrice(item, currentStar);
   }
   return total;
@@ -1869,9 +1873,28 @@ function executeShipBuyConfirm() {
         _flashStatDelta("pilot-record", policeRecordScore - recBefore);
       if (typeof updateInfoTravel === "function") updateInfoTravel();
     }
-    playerCargo = {};
-    if (typeof lockedCargo !== "undefined") lockedCargo = {};
-    if (typeof playerCargoBuyPrice !== "undefined") playerCargoBuyPrice = {};
+    const newCargoCap =
+      SHIP_STATS[shipBuyName].cargo +
+      playerShip.gadgets.filter((g) => g === "5 extra cargo bays").length * 5;
+    const keptCargo = {};
+    const keptLocked = {};
+    const keptBuyPrice = {};
+    let usedCap = 0;
+    for (const id in lockedCargo) {
+      const qty = lockedCargo[id] || 0;
+      if (qty <= 0) continue;
+      const held = playerCargo[id] || 0;
+      const keep = Math.min(held, qty, Math.max(0, newCargoCap - usedCap));
+      if (keep <= 0) continue;
+      keptCargo[id] = keep;
+      keptLocked[id] = keep;
+      if (playerCargoBuyPrice && playerCargoBuyPrice[id] != null)
+        keptBuyPrice[id] = playerCargoBuyPrice[id];
+      usedCap += keep;
+    }
+    playerCargo = keptCargo;
+    lockedCargo = keptLocked;
+    playerCargoBuyPrice = keptBuyPrice;
     if (typeof beginMissionCancelBatch === "function") beginMissionCancelBatch();
     if (typeof checkDeliverCargoIntegrity === "function")
       checkDeliverCargoIntegrity("insufficient cargo");
