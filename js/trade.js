@@ -477,9 +477,9 @@ function _checkPoliceCommission() {
     return;
   }
   var rec = typeof policeRecordScore !== "undefined" ? policeRecordScore : 0;
-  if (rec <= 4) {
+  if (rec <= -5) {
     _confiscatePoliceShip();
-  } else if (rec <= 9) {
+  } else if (rec <= 4) {
     if (!_policeCommissionWarned) {
       _policeCommissionWarned = true;
       if (typeof addMailMessage === "function")
