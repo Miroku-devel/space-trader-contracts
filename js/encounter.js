@@ -614,6 +614,16 @@ function _afterBurst() {
 }
 function fleeAction() {
   window._isEscaping = true;
+  if (localStorage.getItem("AUTO_FLEE") === "1" && !window._autoMode) {
+    window._autoMode = 'flee';
+    document.querySelectorAll('.enc-btn').forEach(function (el) {
+      el.classList.add('hidden');
+    });
+    if (encBtns.interrupt) {
+      encBtns.interrupt.disabled = false;
+      encBtns.interrupt.classList.remove('hidden');
+    }
+  }
   if (encBtns.flee) encBtns.flee.disabled = true;
   if (encBtns.submit) encBtns.submit.disabled = true;
   if (encBtns.surrender) encBtns.surrender.disabled = true;
@@ -667,7 +677,9 @@ function fleeAction() {
         if (typeof window._updateAttackBtn === "function")
           window._updateAttackBtn();
         showTravelMsg("Escape failed!");
-        if (window._autoMode && !window._enemyOutcomeDecided) {
+        if (window._autoMode === 'flee' && !window._enemyOutcomeDecided) {
+          setTimeout(fleeAction, 800);
+        } else if (window._autoMode && !window._enemyOutcomeDecided) {
           setTimeout(_autoDecide, 800);
         }
       }

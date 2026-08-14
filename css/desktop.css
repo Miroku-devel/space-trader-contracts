@@ -2947,7 +2947,7 @@ label[for="bank-loan-input"] span:last-child {
     cursor: default;
     pointer-events: none;
 }
-#chk-auto-fuel, #chk-auto-repair, #chk-auto-fullscreen, #chk-show-framerate, #chk-hide-breaking-news, #chk-auto-ignore-traders, #chk-no-sound, #chk-no-blur {
+#chk-auto-fuel, #chk-auto-repair, #chk-auto-fullscreen, #chk-auto-flee, #chk-show-framerate, #chk-hide-breaking-news, #chk-auto-ignore-traders, #chk-no-sound, #chk-no-blur {
     -webkit-appearance: none;
     appearance: none;
     width: 14px;
@@ -2960,7 +2960,7 @@ label[for="bank-loan-input"] span:last-child {
     position: relative;
     vertical-align: middle;
 }
-#chk-auto-fuel:checked::after, #chk-auto-repair:checked::after, #chk-auto-fullscreen:checked::after, #chk-show-framerate:checked::after, #chk-hide-breaking-news:checked::after, #chk-auto-ignore-traders:checked::after, #chk-no-sound:checked::after, #chk-no-blur:checked::after {
+#chk-auto-fuel:checked::after, #chk-auto-repair:checked::after, #chk-auto-fullscreen:checked::after, #chk-auto-flee:checked::after, #chk-show-framerate:checked::after, #chk-hide-breaking-news:checked::after, #chk-auto-ignore-traders:checked::after, #chk-no-sound:checked::after, #chk-no-blur:checked::after {
     content: '';
     position: absolute;
     left: 3.5px;
@@ -2971,7 +2971,7 @@ label[for="bank-loan-input"] span:last-child {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
-#chk-auto-fuel ~ *, #chk-auto-repair ~ *, #chk-auto-fullscreen ~ *, #chk-show-framerate ~ *, #chk-hide-breaking-news ~ *, #chk-auto-ignore-traders ~ *, #chk-no-sound ~ *, #chk-no-blur ~ * {
+#chk-auto-fuel ~ *, #chk-auto-repair ~ *, #chk-auto-fullscreen ~ *, #chk-auto-flee ~ *, #chk-show-framerate ~ *, #chk-hide-breaking-news ~ *, #chk-auto-ignore-traders ~ *, #chk-no-sound ~ *, #chk-no-blur ~ * {
     color: #00c8ff;
 }
 @keyframes fuel-blink {
