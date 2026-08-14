@@ -373,9 +373,17 @@ function generateProcMissions(star) {
   saveMissionState();
 }
 function saveMissionState() {
+  const currentName = currentStar ? currentStar.name : null;
   const data = {
     procMissions: procMissions
-      .filter((m) => !m.completed)
+      .filter(
+        (m) =>
+          !m.completed &&
+          (m.active ||
+            (currentName != null &&
+              !m.cancelled &&
+              m.pickupStarName === currentName)),
+      )
       .map((m) => ({
         id: m.id,
         type: m.type,
@@ -410,15 +418,18 @@ function saveMissionState() {
         cancelled: m.cancelled || false,
       })),
   };
-  localStorage.setItem(MISSION_SAVE_KEY, JSON.stringify(data));
+  try {
+    localStorage.setItem(MISSION_SAVE_KEY, JSON.stringify(data));
+  } catch (e) {}
 }
 function loadMissionState() {
   const raw = localStorage.getItem(MISSION_SAVE_KEY);
   if (!raw) return false;
   try {
     const data = JSON.parse(raw);
-    if (data.procMissions) {
-      procMissions = data.procMissions;
+    if (!Array.isArray(data.procMissions)) return false;
+    procMissions = data.procMissions;
+    if (procMissions.length) {
       procMissions.forEach(function (m) {
         if (m.hasItem == null) m.hasItem = !!m.active;
         if (m.type === "patrol") {

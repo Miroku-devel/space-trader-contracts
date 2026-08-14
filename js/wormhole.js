@@ -239,6 +239,7 @@
     if (typeof checkMissionCompletion === "function") checkMissionCompletion();
     if (typeof generateProcMissions === "function")
       generateProcMissions(currentStar);
+    if (typeof saveState === "function") saveState();
     if (typeof updateInfoClean === "function") updateInfoClean();
     if (typeof updateInfoRoute === "function") updateInfoRoute();
     overlay.classList.add("hidden");

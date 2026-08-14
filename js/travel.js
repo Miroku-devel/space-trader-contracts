@@ -126,6 +126,7 @@ function arriveAtStar() {
     if (typeof generateProcMissions === "function")
       generateProcMissions(currentStar);
     if (typeof renderMissionPages === "function") renderMissionPages();
+    if (typeof saveState === "function") saveState();
     updateInfoClean();
     updateInfoRoute();
   } else if (selectedStar && selectedStar === currentStar) {
