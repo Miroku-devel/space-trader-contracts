@@ -91,6 +91,17 @@ function _processArrest() {
     }
     playerFuel = maxFuelCapacity();
     saveFuelState();
+    if (
+      typeof routePath !== "undefined" &&
+      routePath.length > 1 &&
+      typeof findPath === "function" &&
+      typeof currentStar !== "undefined" &&
+      currentStar
+    ) {
+      var dest = routePath[routePath.length - 1];
+      routePath = findPath(currentStar, dest);
+      if (typeof updateInfoClean === "function") updateInfoClean();
+    }
   }
   if (typeof policeRecordScore !== "undefined") {
     policeRecordScore = -5;
