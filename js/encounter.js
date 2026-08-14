@@ -386,6 +386,12 @@ function _afterEnemyExit() {
 }
 function resumeTravel() {
   window._autoMode = null;
+  if (window._autoFleeTimers) {
+    window._autoFleeTimers.forEach(function (t) {
+      clearTimeout(t);
+    });
+    window._autoFleeTimers = [];
+  }
   clearTravelMsg();
   _encEpoch++;
   window._actionInProgress = false;
@@ -678,7 +684,9 @@ function fleeAction() {
           window._updateAttackBtn();
         showTravelMsg("Escape failed!");
         if (window._autoMode === 'flee' && !window._enemyOutcomeDecided) {
-          setTimeout(fleeAction, 800);
+          (window._autoFleeTimers = window._autoFleeTimers || []).push(
+            setTimeout(fleeAction, 800),
+          );
         } else if (window._autoMode && !window._enemyOutcomeDecided) {
           setTimeout(_autoDecide, 800);
         }
@@ -1031,6 +1039,12 @@ function _enterAutoMode() {
 }
 function _exitAutoMode() {
   window._autoMode = null;
+  if (window._autoFleeTimers) {
+    window._autoFleeTimers.forEach(function (t) {
+      clearTimeout(t);
+    });
+    window._autoFleeTimers = [];
+  }
   if (encBtns.interrupt) encBtns.interrupt.classList.add('hidden');
   var type = window._enemyType;
   if (window._hasAttacked) {
