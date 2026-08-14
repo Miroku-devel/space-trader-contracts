@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://miroku-devel.github.io/space-trader-contracts/">
-    <img src="assets/button.png" alt="Play the Game">
+    <img src="https://img.shields.io/badge/play_the_game-blue?style=for-the-badge&labelColor=green" alt="Play the Game">
   </a>
 </p>
 
