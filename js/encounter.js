@@ -491,9 +491,11 @@ function attackBurst() {
       SFX.playFightTheme();
     var attackTarget = window._isSmuggler
       ? "smuggler"
-      : window._isHeroEnemy
-        ? window._enemyShipName || window._enemyType
-        : window._enemyType;
+      : window._isManhuntEnemy
+        ? "suspect"
+        : window._isHeroEnemy
+          ? window._enemyShipName || window._enemyType
+          : window._enemyType;
     showTravelMsg("You attack the " + attackTarget + "!");
     var recBefore =
       typeof policeRecordScore !== "undefined" ? policeRecordScore : null;
