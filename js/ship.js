@@ -1736,7 +1736,7 @@ window.openCatchConfirm = function () {
   html += "</div>";
   html += "</div>";
   const rowsHtml =
-    catchRows(transferred, "c-green", "moves", "transferable") +
+    catchRows(transferred, "c-green", "transfer", "transferable") +
     catchRows(discarded, "c-red", "discarded", "lostQty") +
     crewSection;
   if (rowsHtml) {
