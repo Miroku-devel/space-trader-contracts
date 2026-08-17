@@ -116,7 +116,6 @@ function renderOptions() {
         <div id="options-slider">
             <div class="options-actions">
                 <label class="fs-check-label"><input type="checkbox" id="chk-auto-fullscreen"> Auto Fullscreen</label>
-                <label class="fs-check-label"><input type="checkbox" id="chk-auto-flee"> Auto Flee</label>
                 <label class="fs-check-label"><input type="checkbox" id="chk-show-framerate"> Show Framerate</label>
                 <label class="fs-check-label"><input type="checkbox" id="chk-hide-breaking-news"> Hide Breaking News</label>
                 <label class="fs-check-label"><input type="checkbox" id="chk-auto-ignore-traders"> No Traders</label>
@@ -150,11 +149,6 @@ function renderOptions() {
   chk.addEventListener("change", () => {
     localStorage.setItem("AUTO_FULLSCREEN", chk.checked ? "1" : "0");
     toggleFullscreen();
-  });
-  const chkAutoFlee = document.getElementById("chk-auto-flee");
-  chkAutoFlee.checked = localStorage.getItem("AUTO_FLEE") === "1";
-  chkAutoFlee.addEventListener("change", () => {
-    localStorage.setItem("AUTO_FLEE", chkAutoFlee.checked ? "1" : "0");
   });
   const chkFramerate = document.getElementById("chk-show-framerate");
   chkFramerate.checked = localStorage.getItem("debugFps") === "1";
@@ -231,8 +225,7 @@ function renderOptions() {
       localStorage.removeItem("RESOLUTION_SCALE");
       localStorage.removeItem("ENCOUNTER_RATE");
       localStorage.removeItem("MUSIC_VOLUME");
-localStorage.removeItem("AUTO_FULLSCREEN");
-      localStorage.removeItem("AUTO_FLEE");
+      localStorage.removeItem("AUTO_FULLSCREEN");
       localStorage.removeItem("debugFps");
       localStorage.removeItem("AUTO_IGNORE_TRADERS");
       localStorage.removeItem("HIDE_BREAKING_NEWS");

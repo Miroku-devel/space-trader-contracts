@@ -620,7 +620,7 @@ function _afterBurst() {
 }
 function fleeAction() {
   window._isEscaping = true;
-  if (localStorage.getItem("AUTO_FLEE") === "1" && !window._autoMode) {
+  if (!window._autoMode) {
     window._autoMode = 'flee';
     document.querySelectorAll('.enc-btn').forEach(function (el) {
       el.classList.add('hidden');
