@@ -36,6 +36,12 @@
         border-left: none;
         border-right: none;
     }
+    #trade-panel-bg-wrap, #search-panel-bg-wrap, #dashboard-panel-bg-wrap, #ship-panel-bg-wrap, #bank-panel-bg-wrap, #mail-panel-bg-wrap, #mission-panel-bg-wrap, #options-panel-bg-wrap, #trader-npc-panel-bg-wrap, #surrender-panel-bg-wrap, #board-npc-panel-bg-wrap {
+        border-radius: 0;
+    }
+    #trade-panel-bg, #search-panel-bg, #dashboard-panel-bg, #ship-panel-bg, #bank-panel-bg, #mail-panel-bg, #mission-panel-bg, #options-panel-bg, #trader-npc-panel-bg, #surrender-panel-bg, #board-npc-panel-bg {
+        clip-path: inset(10px round 0);
+    }
     #bank-loan-input {
         flex: 1 1 100%;
     }
