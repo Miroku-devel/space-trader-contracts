@@ -151,15 +151,6 @@ html, body {
     visibility: hidden;
     pointer-events: none;
 }
-.overlay-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: rgba(0, 0, 0, 0.35);
-}
 #info-panel {
     border: 1px solid rgba(0, 200, 255, 0.3);
     border-bottom: none;
@@ -167,7 +158,7 @@ html, body {
     overflow: hidden;
     pointer-events: auto;
 }
-#search-panel, #trade-panel, #dashboard-panel, #ship-panel, #bank-panel, #mail-panel, #mission-panel, #options-panel {
+#search-panel, #trade-panel, #dashboard-panel, #ship-panel, #bank-panel, #mail-panel, #mission-panel, #options-panel, #trader-npc-panel {
     border: 1px solid rgba(0, 200, 255, 0.3);
     border-top: none;
     border-radius: 0 0 12px 12px;
@@ -191,7 +182,6 @@ html, body {
     -webkit-backdrop-filter: blur(5px);
 }
 html.no-blur .blur-bg,
-html.no-blur .overlay-bg,
 html.no-blur #info-panel, html.no-blur #trade-qty-panel, html.no-blur #trade-qty-overlay,
 html.no-blur #trader-npc-qty-overlay, html.no-blur #trader-npc-qty-panel,
 html.no-blur #confirm-panel, html.no-blur #search-bookmarks,
@@ -207,13 +197,16 @@ html.no-blur #labels,
 html.no-blur #travel-scene {
     filter: none !important;
 }
+html.no-blur #trade-panel-bg-wrap, html.no-blur #search-panel-bg-wrap, html.no-blur #dashboard-panel-bg-wrap, html.no-blur #ship-panel-bg-wrap, html.no-blur #bank-panel-bg-wrap, html.no-blur #mail-panel-bg-wrap, html.no-blur #mission-panel-bg-wrap, html.no-blur #options-panel-bg-wrap, html.no-blur #trader-npc-panel-bg-wrap, html.no-blur #surrender-panel-bg-wrap, html.no-blur #board-npc-panel-bg-wrap {
+    display: none !important;
+}
 html.no-blur #info-panel,
 html.no-blur #search-panel, html.no-blur #search-bookmarks,
 html.no-blur #bank-panel, html.no-blur #ship-panel, html.no-blur #dashboard-panel, html.no-blur #mail-panel, html.no-blur #mission-panel, html.no-blur #trade-panel, html.no-blur #options-panel,
-html.no-blur #board-npc-panel, html.no-blur #bribe-panel,
+html.no-blur #board-npc-panel, html.no-blur #surrender-panel,
 html.no-blur #trader-npc-panel,
 html.no-blur #hud-footer {
-    background: linear-gradient(rgba(8, 11, 17, 0.95), rgba(33, 48, 76, 0.75));
+    background: linear-gradient(rgba(8, 11, 17, 0.97), rgba(33, 48, 76, 0.97));
 }
 html.no-blur #confirm-panel,
 html.no-blur #trade-qty-panel,
@@ -230,12 +223,11 @@ html.no-blur #mission-sidebar,
 html.no-blur #trade-sidebar {
     background: linear-gradient(rgba(8, 11, 17, 0.31) 0%, rgba(8, 11, 17, 0.76) 15%, rgba(19, 28, 46, 0.6) 85%, rgba(33, 48, 76, 0) 100%);
 }
-.overlay-bg,
-#info-panel, #trade-qty-panel, #trade-qty-overlay,
-#trader-npc-qty-overlay, #trader-npc-qty-panel,
+#info-panel, #trade-qty-panel,
+#trader-npc-qty-panel,
 #confirm-panel, #search-bookmarks,
-#ship-buy-overlay, #ship-buy-panel,
-#bank-repay-overlay, #bank-repay-panel,
+#ship-buy-panel,
+#bank-repay-panel,
 #ship-sidebar, #bank-sidebar, #dashboard-sidebar, #mail-sidebar, #mission-sidebar,
 #trade-sidebar, #hud-footer {
     backdrop-filter: blur(5px);
@@ -332,7 +324,7 @@ html.hide-breaking-news #hud-news-label {
     align-items: flex-start;
     justify-content: space-between;
 }
-#search-panel, #trade-panel, #dashboard-panel, #ship-panel, #bank-panel, #mail-panel, #mission-panel, #options-panel {
+#search-panel, #trade-panel, #dashboard-panel, #ship-panel, #bank-panel, #mail-panel, #mission-panel, #options-panel, #trader-npc-panel {
     padding: 16px;
     overflow-y: auto;
     position: fixed;
@@ -351,6 +343,7 @@ html.hide-breaking-news #hud-news-label {
 #bank-overlay.hidden #bank-panel,
 #mail-overlay.hidden #mail-panel,
 #mission-overlay.hidden #mission-panel,
+#trader-npc-overlay.hidden #trader-npc-panel,
 #options-overlay.hidden #options-panel {
     transform: translateX(-50%) translateY(-30px);
     opacity: 0;
@@ -411,6 +404,42 @@ html.hide-breaking-news #hud-news-label {
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
+#trade-panel-bg-wrap, #search-panel-bg-wrap, #dashboard-panel-bg-wrap, #ship-panel-bg-wrap, #bank-panel-bg-wrap, #mail-panel-bg-wrap, #mission-panel-bg-wrap, #options-panel-bg-wrap, #trader-npc-panel-bg-wrap, #surrender-panel-bg-wrap, #board-npc-panel-bg-wrap {
+    position: fixed;
+    z-index: 23;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 0 0 12px 12px;
+}
+#trade-panel-bg, #search-panel-bg, #dashboard-panel-bg, #ship-panel-bg, #bank-panel-bg, #mail-panel-bg, #mission-panel-bg, #options-panel-bg, #trader-npc-panel-bg, #surrender-panel-bg, #board-npc-panel-bg {
+    position: absolute;
+    transition: filter 0.3s ease;
+    clip-path: inset(10px round 0 0 12px 12px);
+}
+#trade-panel-bg.blur-bg, #search-panel-bg.blur-bg, #dashboard-panel-bg.blur-bg, #ship-panel-bg.blur-bg, #bank-panel-bg.blur-bg, #mail-panel-bg.blur-bg, #mission-panel-bg.blur-bg, #options-panel-bg.blur-bg, #trader-npc-panel-bg.blur-bg, #surrender-panel-bg.blur-bg, #board-npc-panel-bg.blur-bg {
+    filter: blur(5px);
+}
+#trade-overlay.hidden #trade-panel-bg, #search-overlay.hidden #search-panel-bg, #dashboard-overlay.hidden #dashboard-panel-bg, #ship-overlay.hidden #ship-panel-bg, #bank-overlay.hidden #bank-panel-bg, #mail-overlay.hidden #mail-panel-bg, #mission-overlay.hidden #mission-panel-bg, #options-overlay.hidden #options-panel-bg, #trader-npc-overlay.hidden #trader-npc-panel-bg, #surrender-overlay.hidden #surrender-panel-bg, #board-npc-overlay.hidden #board-npc-panel-bg {
+    filter: none;
+}
+#trader-npc-panel-bg {
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+#trader-npc-overlay.hidden #trader-npc-panel-bg {
+    opacity: 0;
+}
+#surrender-panel-bg {
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+#surrender-overlay.hidden #surrender-panel-bg {
+    opacity: 0;
+}
+#board-npc-panel-bg {
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+#board-npc-overlay.hidden #board-npc-panel-bg {
+    opacity: 0;
 }
 #ship-sidebar,#bank-sidebar,#dashboard-sidebar,#mail-sidebar,#mission-sidebar,#trade-sidebar {
     flex-shrink: 0;
@@ -1663,11 +1692,11 @@ label[for="bank-loan-input"] span:last-child {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.4);
     z-index: 27;
     pointer-events: auto;
 }
 #trade-qty-panel {
+    background: rgba(8, 12, 20, 0.82);
     border: 1px solid rgba(0, 200, 255, 0.3);
     pointer-events: auto;
     border-radius: 12px;
@@ -1849,7 +1878,6 @@ label[for="bank-loan-input"] span:last-child {
 #trader-npc-qty-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 200;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
     pointer-events: auto;
 }
 #trader-npc-qty-panel {
@@ -2060,11 +2088,11 @@ label[for="bank-loan-input"] span:last-child {
 #surrender-overlay.hidden {
     pointer-events: none;
 }
-#surrender-overlay.hidden #bribe-panel {
+#surrender-overlay.hidden #surrender-panel {
     transform: translateX(-50%) translateY(-30px);
     opacity: 0; pointer-events: none;
 }
-#bribe-panel {
+#surrender-panel {
     position: fixed; top: 0; left: 50%;
     transform: translateX(-50%) translateY(0);
     z-index: 60;
@@ -2080,7 +2108,7 @@ label[for="bank-loan-input"] span:last-child {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
-#bribe-content {
+#surrender-content {
     flex: 1; min-height: 0;
 }
 #surrender-header {
@@ -3071,15 +3099,6 @@ label[for="bank-loan-input"] span:last-child {
     height: 100%;
     pointer-events: auto;
     z-index: 50;
-}
-#gameover-overlay .overlay-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    pointer-events: none;
 }
 #gameover-panel {
     position: absolute;

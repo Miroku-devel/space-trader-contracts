@@ -564,6 +564,7 @@ let _mapPaused = false;
 function animate(time) {
   if (!_mapPaused) {
     render(time);
+    copyOpenPanelBg();
     _mapAnimId = requestAnimationFrame(animate);
   } else {
     _mapAnimId = null;
@@ -587,4 +588,100 @@ window.resumeMap = function () {
   window._mapPaused = false;
   _mapCanvas(true);
   if (!_mapAnimId) _mapAnimId = requestAnimationFrame(animate);
+};
+const _panelBgState = {};
+function copyPanelBg(overlayId, panelId, srcEl) {
+  const st = _panelBgState[overlayId];
+  const tradeOverlay = document.getElementById(overlayId);
+  const tradePanel = document.getElementById(panelId);
+  const tradeWrap = document.getElementById(panelId + "-bg-wrap");
+  const tradeBg = document.getElementById(panelId + "-bg");
+  const tradeSrc = srcEl || document.getElementById("canvas");
+  if (!st || !st.open || !tradeOverlay || !tradePanel || !tradeWrap || !tradeBg || !tradeSrc) return;
+  const r = tradePanel.getBoundingClientRect();
+  const margin = 10;
+  const dw = r.width + margin * 2;
+  const dh = r.height + margin * 2;
+  tradeWrap.style.left = r.left + "px";
+  tradeWrap.style.top = r.top + "px";
+  tradeWrap.style.width = r.width + "px";
+  tradeWrap.style.height = r.height + "px";
+  const s = tradeSrc.getBoundingClientRect();
+  const scaleX = tradeSrc.width / s.width;
+  const scaleY = tradeSrc.height / s.height;
+  const sw = Math.max(1, Math.round(dw * scaleX));
+  const sh = Math.max(1, Math.round(dh * scaleY));
+  if (tradeBg.width !== sw) tradeBg.width = sw;
+  if (tradeBg.height !== sh) tradeBg.height = sh;
+  tradeBg.style.left = -margin + "px";
+  tradeBg.style.top = -margin + "px";
+  tradeBg.style.width = dw + "px";
+  tradeBg.style.height = dh + "px";
+  const ctx = tradeBg.getContext("2d");
+  const W = tradeBg.width;
+  const H = tradeBg.height;
+  ctx.clearRect(0, 0, W, H);
+  let sx = (r.left - margin) * scaleX;
+  let sy = (r.top - margin) * scaleY;
+  let sww = dw * scaleX;
+  let shh = dh * scaleY;
+  let dx = 0;
+  let dy = 0;
+  if (sx < 0) {
+    dx = -sx;
+    sww += sx;
+    sx = 0;
+  }
+  if (sy < 0) {
+    dy = -sy;
+    shh += sy;
+    sy = 0;
+  }
+  if (sx + sww > tradeSrc.width) sww = tradeSrc.width - sx;
+  if (sy + shh > tradeSrc.height) shh = tradeSrc.height - sy;
+  if (sww > 0 && shh > 0) {
+    ctx.drawImage(tradeSrc, sx, sy, sww, shh, dx, dy, sww, shh);
+  }
+  if (dy > 0) ctx.drawImage(tradeSrc, sx, 0, sww, 1, 0, 0, W, dy);
+  if (dx > 0) ctx.drawImage(tradeSrc, 0, sy, 1, shh, 0, dy, dx, shh);
+  if (dx + sww < W)
+    ctx.drawImage(tradeSrc, tradeSrc.width - 1, sy, 1, shh, dx + sww, dy, W - dx - sww, shh);
+  if (dy + shh < H)
+    ctx.drawImage(tradeSrc, sx, tradeSrc.height - 1, sww, 1, dx, dy + shh, sww, H - dy - shh);
+  ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
+  ctx.fillRect(0, 0, W, H);
+}
+function copyOpenPanelBg() {
+  for (const id in _panelBgState) {
+    if (_panelBgState[id].open) {
+      const pid = _panelBgState[id].panelId;
+      if (pid) copyPanelBg(id, pid, _panelBgState[id].src);
+    }
+  }
+}
+function travelCopy() {
+  for (const id in _panelBgState) {
+    const st = _panelBgState[id];
+    if (st.open && st.src) copyPanelBg(id, st.panelId, st.src);
+  }
+}
+window.updatePanelBlur = function (overlayId, panelId, open, srcEl) {
+  const overlay = document.getElementById(overlayId);
+  const panel = document.getElementById(panelId);
+  const bg = document.getElementById(panelId + "-bg");
+  const wrap = document.getElementById(panelId + "-bg-wrap");
+  const src = srcEl || document.getElementById("canvas");
+  if (!overlay || !panel || !bg || !wrap || !src) return;
+  const st = _panelBgState[overlayId] || (_panelBgState[overlayId] = { open: false, panelId: panelId, src: null });
+  st.src = srcEl || null;
+  if (open && !st.open) {
+    st.open = true;
+    copyPanelBg(overlayId, panelId, st.src);
+    requestAnimationFrame(() => bg.classList.add("blur-bg"));
+    if (st.src && window._registerTravelRender) window._registerTravelRender(travelCopy);
+  } else if (!open && st.open) {
+    st.open = false;
+    bg.classList.remove("blur-bg");
+    if (window._unregisterTravelRender) window._unregisterTravelRender(travelCopy);
+  }
 };

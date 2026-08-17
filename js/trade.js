@@ -775,9 +775,9 @@ function openQtyPopup(id, action) {
             </div>
             <div class="qty-total">Total: <span class="qty-total-val">${price}</span>&nbsp;cr</div>
             <div class="qty-btns">
+                <button class="qty-btn cancel">Cancel</button>
                 <button class="qty-btn max">Max</button>
                 <button class="qty-btn confirm">Buy</button>
-                <button class="qty-btn cancel">Cancel</button>
             </div>`;
   } else {
     const price = getItemSellPrice(item, star);
@@ -791,9 +791,9 @@ function openQtyPopup(id, action) {
             </div>
             <div class="qty-total">Total: <span class="qty-total-val">${price}</span>&nbsp;cr</div>
             <div class="qty-btns">
+                <button class="qty-btn cancel">Cancel</button>
                 <button class="qty-btn max">Max</button>
                 <button class="qty-btn confirm">Sell</button>
-                <button class="qty-btn cancel">Cancel</button>
             </div>`;
   }
   qtyOverlay.classList.remove("hidden");

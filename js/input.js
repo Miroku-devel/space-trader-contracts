@@ -505,18 +505,64 @@ window.addEventListener("beforeunload", () => {
   function updateBgBlur() {
     const wormhole = document.getElementById("wormhole-overlay");
     const anyOpen = overlays.some(
-      (el) => el !== wormhole && !el.classList.contains("hidden"),
+      (el) =>
+        el !== wormhole &&
+        el.id !== "trade-overlay" &&
+        el.id !== "search-overlay" &&
+        el.id !== "dashboard-overlay" &&
+        el.id !== "ship-overlay" &&
+        el.id !== "bank-overlay" &&
+        el.id !== "mail-overlay" &&
+        el.id !== "mission-overlay" &&
+        el.id !== "options-overlay" &&
+        el.id !== "trader-npc-overlay" &&
+        el.id !== "surrender-overlay" &&
+        el.id !== "board-npc-overlay" &&
+        !el.classList.contains("hidden"),
     );
-    const isMobile = window.innerWidth <= 600;
     const noBlur = document.documentElement.classList.contains("no-blur");
     const canvas = document.getElementById("canvas");
     const labels = document.getElementById("labels");
     const travelScene = document.getElementById("travel-scene");
-    if (!isMobile && !noBlur) {
+    if (!noBlur) {
       if (canvas) canvas.classList.toggle("blur-bg", anyOpen);
       if (labels) labels.classList.toggle("blur-bg", anyOpen);
       if (travelScene) travelScene.classList.toggle("blur-bg", anyOpen);
     }
+    const tradeOverlay = document.getElementById("trade-overlay");
+    const tradeOpen = tradeOverlay && !tradeOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("trade-overlay", "trade-panel", tradeOpen);
+    const searchOverlay = document.getElementById("search-overlay");
+    const searchOpen = searchOverlay && !searchOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("search-overlay", "search-panel", searchOpen);
+    const dashboardOverlay = document.getElementById("dashboard-overlay");
+    const dashboardOpen = dashboardOverlay && !dashboardOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("dashboard-overlay", "dashboard-panel", dashboardOpen);
+    const shipOverlay = document.getElementById("ship-overlay");
+    const shipOpen = shipOverlay && !shipOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("ship-overlay", "ship-panel", shipOpen);
+    const bankOverlay = document.getElementById("bank-overlay");
+    const bankOpen = bankOverlay && !bankOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("bank-overlay", "bank-panel", bankOpen);
+    const mailOverlay = document.getElementById("mail-overlay");
+    const mailOpen = mailOverlay && !mailOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("mail-overlay", "mail-panel", mailOpen);
+    const missionOverlay = document.getElementById("mission-overlay");
+    const missionOpen = missionOverlay && !missionOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("mission-overlay", "mission-panel", missionOpen);
+    const optionsOverlay = document.getElementById("options-overlay");
+    const optionsOpen = optionsOverlay && !optionsOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("options-overlay", "options-panel", optionsOpen);
+    const traderNpcOverlay = document.getElementById("trader-npc-overlay");
+    const traderNpcOpen = traderNpcOverlay && !traderNpcOverlay.classList.contains("hidden");
+    const traderNpcSky = document.querySelector("#travel-scene .combat-sky");
+    if (window.updatePanelBlur) window.updatePanelBlur("trader-npc-overlay", "trader-npc-panel", traderNpcOpen, traderNpcSky);
+    const surrenderOverlay = document.getElementById("surrender-overlay");
+    const surrenderOpen = surrenderOverlay && !surrenderOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("surrender-overlay", "surrender-panel", surrenderOpen, traderNpcSky);
+    const boardNpcOverlay = document.getElementById("board-npc-overlay");
+    const boardNpcOpen = boardNpcOverlay && !boardNpcOverlay.classList.contains("hidden");
+    if (window.updatePanelBlur) window.updatePanelBlur("board-npc-overlay", "board-npc-panel", boardNpcOpen, traderNpcSky);
   }
   window.updateBgBlur = updateBgBlur;
   overlays.forEach((el) => {

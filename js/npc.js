@@ -256,7 +256,7 @@
     return { bribe: bribe, canPay: canPay };
   }
   function renderBribe() {
-    var content = document.getElementById("bribe-content");
+    var content = document.getElementById("surrender-content");
     var p = calcBribe();
     var systemName =
       typeof currentStar !== "undefined" && currentStar
@@ -387,7 +387,7 @@
     };
   }
   function renderSurrender() {
-    var content = document.getElementById("bribe-content");
+    var content = document.getElementById("surrender-content");
     var p = calcPenalties();
     var recScore =
       typeof policeRecordScore !== "undefined" ? policeRecordScore : 0;
@@ -457,7 +457,7 @@
     document.getElementById("surrender-overlay").classList.remove("hidden");
   }
   function renderPirateSurrender() {
-    var content = document.getElementById("bribe-content");
+    var content = document.getElementById("surrender-content");
     var hasCargo = typeof TRADE_ITEMS !== "undefined" && typeof playerCargo !== "undefined" &&
       TRADE_ITEMS.some(function (t) { return (playerCargo[t.id] || 0) > 0; });
     var stats = typeof SHIP_STATS !== "undefined" ? SHIP_STATS[window._enemyShipName] : null;
@@ -705,6 +705,17 @@
       .getElementById("btn-trader-npc-close")
       .addEventListener("click", closeTraderTrade);
   }
+  function bindQtySlider(body) {
+    var slider = body.querySelector(".qty-slider");
+    var valSpan = body.querySelector(".qty-val");
+    var totalSpan = body.querySelector(".qty-total-val");
+    if (!slider || !valSpan || !totalSpan) return;
+    slider.addEventListener("input", function () {
+      var v = parseInt(slider.value);
+      valSpan.textContent = v;
+      totalSpan.textContent = window._traderQtyData.price * v;
+    });
+  }
   function openTraderQty(idx) {
     var ti = traderItems[idx];
     var item = ti.item;
@@ -742,9 +753,9 @@
       price +
       "</span>&nbsp;cr</div>" +
       '<div class="qty-btns">' +
+      '<button class="qty-btn cancel" onclick="window._traderQtyCancel()">Cancel</button>' +
       '<button class="qty-btn max" onclick="window._traderQtyMax()">Max</button>' +
       '<button class="qty-btn confirm" onclick="window._traderQtyConfirm()">Buy</button>' +
-      '<button class="qty-btn cancel" onclick="window._traderQtyCancel()">Cancel</button>' +
       "</div>";
     document
       .getElementById("trader-npc-qty-overlay")
@@ -757,6 +768,7 @@
       ti: ti,
       mode: "buy",
     };
+    bindQtySlider(body);
   }
   function openTraderSellQty(idx) {
     var ti = traderItems[idx];
@@ -781,9 +793,9 @@
       price +
       "</span>&nbsp;cr</div>" +
       '<div class="qty-btns">' +
+      '<button class="qty-btn cancel" onclick="window._traderQtyCancel()">Cancel</button>' +
       '<button class="qty-btn max" onclick="window._traderQtyMax()">Max</button>' +
       '<button class="qty-btn confirm" onclick="window._traderQtyConfirm()">Sell</button>' +
-      '<button class="qty-btn cancel" onclick="window._traderQtyCancel()">Cancel</button>' +
       "</div>";
     document
       .getElementById("trader-npc-qty-overlay")
@@ -795,6 +807,7 @@
       ti: ti,
       mode: "sell",
     };
+    bindQtySlider(body);
   }
   function closeTraderQty() {
     document.getElementById("trader-npc-qty-overlay").classList.add("hidden");

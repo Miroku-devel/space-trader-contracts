@@ -306,9 +306,9 @@ function showRepayPopup() {
         </div>
         <div class="qty-total">Repay: <span class="qty-total-val">0</span>&nbsp;cr</div>
         <div class="qty-btns">
+            <button class="qty-btn cancel">Cancel</button>
             <button class="qty-btn max">Max</button>
             <button class="qty-btn confirm">Repay</button>
-            <button class="qty-btn cancel">Cancel</button>
         </div>
     `;
   const slider = body.querySelector(".qty-slider");

@@ -85,9 +85,7 @@ if (localStorage.getItem("HIDE_BREAKING_NEWS") === "1") {
 function applyNoBlur() {
   document.documentElement.classList.toggle(
     "no-blur",
-    isMobile() ||
-      window.innerWidth <= 600 ||
-      localStorage.getItem("NO_BLUR") === "1",
+    localStorage.getItem("NO_BLUR") === "1",
   );
 }
 window.addEventListener("resize", applyNoBlur);
@@ -198,14 +196,6 @@ function renderOptions() {
     applyNoBlur();
     if (typeof updateBgBlur === "function") updateBgBlur();
   });
-  const toggleBlurLabel = () => {
-    const label = document.getElementById("chk-no-blur");
-    if (!label) return;
-    label.parentElement.style.display =
-      isMobile() || window.innerWidth <= 600 ? "none" : "";
-  };
-  toggleBlurLabel();
-  window.addEventListener("resize", toggleBlurLabel);
   document.getElementById("options-btn-debug").innerHTML = "Console";
   document
     .getElementById("options-btn-debug")
