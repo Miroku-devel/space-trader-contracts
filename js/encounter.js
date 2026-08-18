@@ -1778,6 +1778,7 @@ function spawnEncounter(type) {
   window._attackMsgShown = false;
   window._attackStarted = false;
   window._enemyType = type;
+  if (typeof window.resetTraderItems === "function") window.resetTraderItems();
   window._encounterSystem = _destSystem;
   window._enemyOutcomeDecided = false;
   window._isEnemyFleeing = false;

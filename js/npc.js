@@ -812,8 +812,11 @@
   function closeTraderQty() {
     document.getElementById("trader-npc-qty-overlay").classList.add("hidden");
   }
+  function resetTraderItems() {
+    traderItems = [];
+  }
   function openTraderTrade() {
-    traderItems = generateTraderItems();
+    if (traderItems.length === 0) traderItems = generateTraderItems();
     renderTraderTrade();
     var encBtns = document.querySelectorAll(".enc-btn");
     for (var i = 0; i < encBtns.length; i++) encBtns[i].disabled = true;
@@ -828,6 +831,7 @@
     if (tradeBtn) tradeBtn.disabled = false;
   }
   window.openTraderTrade = openTraderTrade;
+  window.resetTraderItems = resetTraderItems;
   window._traderBuy = openTraderQty;
   window._traderSell = openTraderSellQty;
   window._closeTraderQty = closeTraderQty;
