@@ -83,10 +83,11 @@ if (localStorage.getItem("HIDE_BREAKING_NEWS") === "1") {
   document.documentElement.classList.add("hide-breaking-news");
 }
 function applyNoBlur() {
-  document.documentElement.classList.toggle(
-    "no-blur",
-    localStorage.getItem("NO_BLUR") === "1",
-  );
+  const on = localStorage.getItem("NO_BLUR") === "1";
+  document.documentElement.classList.toggle("no-blur", on);
+  if (!on && typeof window.copyOpenPanelBg === "function") {
+    window.copyOpenPanelBg();
+  }
 }
 window.addEventListener("resize", applyNoBlur);
 applyNoBlur();

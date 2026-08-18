@@ -590,7 +590,11 @@ window.resumeMap = function () {
   if (!_mapAnimId) _mapAnimId = requestAnimationFrame(animate);
 };
 const _panelBgState = {};
+function noBlurActive() {
+  return document.documentElement.classList.contains("no-blur");
+}
 function copyPanelBg(overlayId, panelId, srcEl) {
+  if (noBlurActive()) return;
   const st = _panelBgState[overlayId];
   const tradeOverlay = document.getElementById(overlayId);
   const tradePanel = document.getElementById(panelId);
@@ -660,11 +664,13 @@ function copyOpenPanelBg() {
   }
 }
 function travelCopy() {
+  if (noBlurActive()) return;
   for (const id in _panelBgState) {
     const st = _panelBgState[id];
     if (st.open && st.src) copyPanelBg(id, st.panelId, st.src);
   }
 }
+window.copyOpenPanelBg = copyOpenPanelBg;
 window.updatePanelBlur = function (overlayId, panelId, open, srcEl) {
   const overlay = document.getElementById(overlayId);
   const panel = document.getElementById(panelId);
