@@ -206,7 +206,7 @@ html.no-blur #bank-panel, html.no-blur #ship-panel, html.no-blur #dashboard-pane
 html.no-blur #board-npc-panel, html.no-blur #surrender-panel,
 html.no-blur #trader-npc-panel,
 html.no-blur #hud-footer {
-    background: linear-gradient(rgba(8, 11, 17, 0.97), rgba(33, 48, 76, 0.97));
+    background: linear-gradient(rgba(8, 11, 17, 0.97), rgba(45, 61, 100, 0.97));
 }
 html.no-blur #confirm-panel,
 html.no-blur #trade-qty-panel,
@@ -221,7 +221,7 @@ html.no-blur #dashboard-sidebar,
 html.no-blur #mail-sidebar,
 html.no-blur #mission-sidebar,
 html.no-blur #trade-sidebar {
-    background: linear-gradient(rgba(8, 11, 17, 0.31) 0%, rgba(8, 11, 17, 0.76) 15%, rgba(19, 28, 46, 0.6) 85%, rgba(33, 48, 76, 0) 100%);
+    background: linear-gradient(rgba(8, 11, 17, 0) 0%, rgba(8, 11, 17, 0.8) 15%, rgba(42, 56, 91, 0.7) 85%, rgba(33, 48, 76, 0) 100%);
 }
 #info-panel, #trade-qty-panel,
 #trader-npc-qty-panel,
@@ -1608,7 +1608,7 @@ label[for="bank-loan-input"] span:last-child {
     color: #ff6666;
 }
 .trade-row.profitable {
-    background: rgba(0, 200, 255, 0.1);
+    background: rgba(0, 171, 255, 0.18);
 }
 .trade-row.not-traded {
     opacity: 0.35;
